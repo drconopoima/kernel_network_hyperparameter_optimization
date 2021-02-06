@@ -13,13 +13,19 @@ nimble install -y httpbeast --nim:"$HOME/.nimble/nim/bin/nim"
 nim c -d:release --threads:on server/httpbeast_server.nim
 ```
 
-## Run server
+## Run HTTP server
 
 ```sh
 ./server/httpbeast_server.nim
 ```
 
 Server listens on port 9292.
+
+## Run K6 loadtest in server mode
+
+```sh
+k6 run --quiet --linger -e ENDPOINT=localhost:9292 k6/loadtest_server.js
+```
 
 ## Server Installation
 
