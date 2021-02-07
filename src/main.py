@@ -69,7 +69,6 @@ def maximize_requests(k6_url, max_vus):
 
 
 def main():
-    global k6_url
     k6_url = "http://localhost:6565"
     try:
         opts, args = getopt.getopt(
