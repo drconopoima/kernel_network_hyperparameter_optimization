@@ -48,7 +48,8 @@ k6 run --quiet --linger --paused -e ENDPOINT=localhost:9292 k6/loadtest_server.j
 
 ```sh
 # Install httpbeast package
-nimble install -y httpbeast --nim:"$HOME/.nimble/nim/bin/nim"
+nimble install -y httpbeast # --nim:"$HOME/.nimble/nim/bin/nim" # Optionally provide route to custom nim install
+
 # Compile server
 nim c -d:release --threads:on server/httpbeast_server.nim
 ```
