@@ -90,6 +90,7 @@ sh ./install.sh $HOME/.nimble
 ./bin/nimble refresh -y --nim:"$HOME/.nimble/nim/bin/nim"
 # Install latest nimble
 ./bin/nimble install -y nimble --nim:"$HOME/.nimble/nim/bin/nim"
+ln -s -T ~/.nimble/nim/bin/nim ~/.nimble/bin/nim 
 ```
 
 Add `$HOME/.nimble/bin/` to your path:
