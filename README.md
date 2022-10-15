@@ -42,6 +42,33 @@ k6 run --quiet --linger --paused -e ENDPOINT=localhost:9292 k6/loadtest_server.j
     ./kernel_network_hyperparameter_optimization.py --address="http://localhost:6565" --[un]pause
 ```
 
+## Sample Crystal HTTP Server
+
+### Server Compilation
+
+```sh 
+crystal build -Dpreview_mt --release server/crystal_server.cr
+```
+
+### Run HTTP Server
+
+```sh
+./server/crystal_server 
+```
+
+Server listens on port 9292.
+
+### Crystal Installation
+
+#### Ubuntu/Debian Package
+
+```sh
+curl -fsSL https://download.opensuse.org/repositories/devel:languages:crystal/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/archive_uri-https_download-opensuse-org_repositories_devel-languages-crystal_xUbuntu_22-04_Release-key.gpg > /dev/null
+echo 'deb http://download.opensuse.org/repositories/devel:/languages:/crystal/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/archive_uri-https_download-opensuse-org_repositories_devel-languages-crystal_xUbuntu_22-04_Release-key.list
+sudo apt update
+sudo apt install crystal
+```
+
 ## Sample HTTPbeast Server
 
 ### Server Compilation
@@ -62,7 +89,7 @@ nim c -d:release --threads:on server/httpbeast_server.nim
 
 Server listens on port 9292.
 
-### Nim Install
+### Nim Installation
 
 #### Ubuntu/Debian Package
 
@@ -111,5 +138,12 @@ cd ..
 LD_LIBRARY_PATH=./openssl-1.1.1l ./bin/nimble refresh -y --nim:"$HOME/.nimble/nim/bin/nim"
 LD_LIBRARY_PATH=./openssl-1.1.1l ./bin/nimble install -y nimble --nim:"$HOME/.nimble/nim/bin/nim"
 cp ./openssl-1.1.1l/libssl.so "$HOME/.nimble/nim/"
+```
 
+## K6 Loadtest installation
+
+### Snap package
+
+```sh
+sudo snap install k6
 ```
