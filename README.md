@@ -87,6 +87,7 @@ cd $(find . -mindepth 1 -maxdepth 1 -type d -name "nim-[0-9].[0-9].[0-9]" -exec 
 ./koch nimble
 sh ./install.sh $HOME/.nimble
 # Nimble refresh package list
+# As of 2022-10-15, OpenSSL 3 isn't supported by nim, need to provide LD_LIBRARY_PATH to compiled libssl.so, see section [Compile OpenSSL 1.1.1 Ubuntu 22.04]() below
 ./bin/nimble refresh -y --nim:"$HOME/.nimble/nim/bin/nim"
 # Install latest nimble
 ./bin/nimble install -y nimble --nim:"$HOME/.nimble/nim/bin/nim"
@@ -97,4 +98,18 @@ Add `$HOME/.nimble/bin/` to your path:
 
 ```sh
 echo "PATH=\"$PATH:$HOME/.nimble/bin/\"" | tee -a $HOME/.bashrc
+```
+
+#### Compile OpenSSL 1.1.1 Ubuntu 22.04
+```sh
+wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openssl/1.1.1l-1ubuntu1.6/openssl_1.1.1l.orig.tar.gz
+tar -xvf openssl_1.1.1l.orig.tar.gz
+cd openssl-1.1.1l/
+./config
+make
+cd ..
+LD_LIBRARY_PATH=./openssl-1.1.1l ./bin/nimble refresh -y --nim:"$HOME/.nimble/nim/bin/nim"
+LD_LIBRARY_PATH=./openssl-1.1.1l ./bin/nimble install -y nimble --nim:"$HOME/.nimble/nim/bin/nim"
+cp ./openssl-1.1.1l/libssl.so "$HOME/.nimble/nim/"
+
 ```
