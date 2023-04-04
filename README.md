@@ -53,7 +53,7 @@ crystal build -Dpreview_mt --release server/crystal_server.cr
 ### Run HTTP Server
 
 ```sh
-./server/crystal_server 
+./crystal_server 
 ```
 
 Server listens on port 9292.
